@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(){
+main(){
 
   int vector1[20],vector2[20];
   printf("VECTOR 1 \n[");

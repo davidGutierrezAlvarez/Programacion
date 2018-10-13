@@ -1,45 +1,43 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(void){
-  int espacios=0,recorrido=0;
-  char oracion[]="123456789",frace[254];
-/*espacios cuenta los espacios
-* oracion guarda toda la oracion
-* frace guarda la segunda frace dentro de la oracion
-*/
+main(){
+  int espacios;
+  char frase[255]="",continuar='1';
+
+  printf("\t\t\t\tINTRODUCE CUALQUIER ORACION QUE CONTENGA UN MAXICO \n\t\t\t     DE 255 CARACTERES Y TE DARE LA SEGUNDA PALABRA INGRESADA\n\n");
+  while (continuar=='1') {
+    fflush(stdin);
+    //con esto el usuario lo podra usar las veces que quiera
+    espacios=0;
+    //cuando lo use por segunda vez los espacios entre las fraces se resetearan
+    printf("\nIngrese una frase:");
+    gets(frase);//el get permite recivir todos los datos
 
 
-  printf("Escribe cualquer oracion que no sobrepase la cantidad de 255 caracteres\n");
-  gets(oracion);
-  //scanf("%s",&oracion);
-
-
-
-
-  while (oracion[recorrido]!="") {
-    //printf("%i\n%c\n", recorrido,oracion[recorrido]);
-    //frace[recorrido]=oracion[recorrido]
-    //printf("%c,\n%s\n", oracion[recorrido],oracion);
-    printf("%if\n", recorrido);
-    if (oracion[recorrido]=" ") {
-      /* code */
-      printf("es espacio: %s\n",oracion[recorrido] );
+    for (int i = 0; i < 255; i++) {
+      if (espacios==1) {
+        if (frase[i]!=' '){//esto verifica que el usuario al escribir mas de un espacio juntos estos no se impriman
+          printf("%c",frase[i] );
+        }
+      }
+      if (frase[i]==' ') {//esto cuenta la cantidad de espacio que hay
+        if (frase[i-1]!=' ') {//esto verifica que no haya mas de un espacio seguidos
+          espacios++;
+        }
+      }
+    }//Ttermina siclo for
+    if (espacios<1) {//si no hay espacios significa que hay una palabra o ninguna
+      printf("\n\tPOR FAVOR INTRODUSCA MAS DE UNA PALABRA\n");
+    }else{
+      if (espacios>255) {// esto se ejecuta cuando el usuario introduce mas de 255 caracteres
+        printf("\n\n\t\t\tSON MAXIMO 255 CARACTERES, POR FAVOR INGRESE LOS DATOS DE NUEVO" );
+      }else{//si todo sale bien y el usuario introduce bien los valores esto se ejecutara
+        printf("\n\n\t\t\ttu frase tiene '%i' palabras\n\n", espacios+1);
+        printf("desea volver a introducir otra frase: \n1='si' \notro valor= 'no'\n" );
+        scanf("%c",&continuar);
+      }
     }
-    recorrido++;
-
-  }
-  //printf("%s",frace );
-
-
-
-
-  /*for (recorrido; recorrido < count; recorrido++) {
-
-  }
-  */
-
-
-
-  return 0;
+  }//termina while
+   return 0;
 }
