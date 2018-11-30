@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 FILE  *fichero;
 #define archivo "datos.txt"/*nombre del archivo*/
@@ -60,14 +61,30 @@ void agregarAlumno() {
   fclose(fichero);
 }
 
+void mostrarAlumnos(){
+  int c,contador=1;
+
+  fichero = fopen(archivo, "rt");
+  printf("\n\tNOMBRE\tCODIGO\tCARRERA\tACTIVIDADES\tEXAMEN 1\tEXAMEN 2\tPARTICIPACION\tDEPARTAMENTAL");
+  printf("\n%i.- ",contador);
+  contador++;
+  while ((c=fgetc(fichero)) != EOF) {
+    if (c == '\n') {
+      printf("\n%i.- ",contador);
+      contador++;
+    }else if (c == '|') {
+      printf(" | ");
+    }else {
+      putchar(c);
+    }
+  }
+
+
+}
+
 int main() {
   crear();
-  nuevoAlumno();
-  agregarAlumno();
-  nuevoAlumno();
-  agregarAlumno();
-  nuevoAlumno();
-  agregarAlumno();
+  mostrarAlumnos();
 
 
 
