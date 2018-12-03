@@ -1,0 +1,23 @@
+fdjkffg|gfjhhj|jhjjh|100|100|100|||
+fdjkffg|gfjhhj|jhjjh|100|100|100|100|100|
+david|1234|INCO|100|100|100|100|100|
+david|12346|INCO|100|100|100|100|100|
+david|12346|INCO|100|100|100|100|100|
+david|12345|INI|100|100|100|100|100|
+david|12345|INCO|100|100|100|100|100|
+david gutierrez|12345|asd|100|100|100|100|100|
+david gutierrez alvarez|123|dio|100|100|100|100|100|
+gutierrez alvarez david|2140|INCO|100|100|100|100|100| 
+gutierrez alvarez david|2140|INNI|100|100|100|100|100|
+david|david|david|100|100|100|50|100|
+david|david|david|100|100|100|100|100|
+gutierrez alvarez david|12345|INCO|100|100|100|0|100|
+gutierrez alvarez david|12345|INCO|
+gutierrez alvarez david|23456|INCV|100|100|100|100|100|
+david|1234|qwer|100|100|12|100|0|
+gutierrez alvarez david|1234|qwer|
+gutierrez alvarez david|12345|asdf|
+gutierrez alvarez david|12345|zxc|
+gutierrez alvarez david|12345|1234|100|100|100|100|
+gutierrez alvarez david|12345|mj|
+hjhjjhjjhjhjh|1234|98765|0|0|0|10|10|
