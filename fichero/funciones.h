@@ -75,7 +75,6 @@ void nuevoAlumno(){
   printf("\ndepartamental 'porcentaje sobre 100' : ");scanf("%s",&Promedio.Departamental);
 }
 
-
 void agregarAlumno() {//Ccon esto agregamos el alumno creado al fichero
   fichero = fopen(archivo, "at");/*escribe al final del documento*/
   fflush(stdin);
@@ -163,7 +162,6 @@ void mostrarAlumnos() {
   }
   printf("\r     " );
 }
-
 
 int Vcode(char code[]){/*esta funcion valida la existencia del codigo de algun alumno*/
   char inicio = '|', fin = '|', linea[100];
@@ -298,4 +296,47 @@ int contarAlumnos() {
     }
   }
   return CAlumnos;
+}
+
+struct matrizSalon{
+  char Linea[40][300],
+  Calificacion[40][15];
+}Salon;
+
+void saveMatriz() {
+  int c,contador=1,nCaracteres=0;
+  int barrita, count=0;
+  fichero = fopen(archivo, "rt");
+  fflush(stdin);
+  system("cls");
+
+  while ((c=fgetc(fichero)) != EOF) {/*revisara caracter por caracter*/
+    if (c != '\n') {/*revisa renglon por renglon*/
+      Salon.Linea[contador][nCaracteres]=c;/*guarda cada caracter del renglon*/
+      nCaracteres++;/*recorre el renglon*/
+      barrita=0;
+    }else {
+      nCaracteres=0;/*cuando hay un salto de linea recorrera otro renglon*/
+      for (size_t i = 0; Salon.Linea[contador][i] != '\0'; i++) {
+        if (Salon.Linea[contador][i] == '|') {
+          barrita++;
+        }
+        if (barrita == 8 && Salon.Linea[contador][i] != '|') {/*buscar la calificaciones*/
+          Salon.Calificacion[contador][count]=Salon.Linea[contador][i];
+          count++;
+        }else {
+          count=0;/*cuando termina de añadir la calificacion se resetea*/
+        }
+      }/*fin del for*/
+      contador++;
+    }/*fin del condicional*/
+  }/*fin del while*/
+}
+
+
+void mostrar(){
+  for (size_t i = 0; i < contarAlumnos(); i++) {
+    printf("%s\n", Salon.Linea[i]);
+    printf("%s\n", Salon.Calificacion[i]);
+  }
 }

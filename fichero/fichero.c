@@ -64,6 +64,8 @@ int main() {
         mostrarAlumnos();
       break;
       case '5': {
+        saveMatriz();
+        mostrar();
         printf("en construccion...");
       }
         break;
