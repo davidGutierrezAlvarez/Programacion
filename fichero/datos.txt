@@ -6,3 +6,7 @@ gutierrez alvarez david|23456|INCV|100|100|100|100|100|100|
 gutierrez alvarez david|12345|1234|100|100|100|100|100|100|
 gutierrez alvarez david|123456|100|100|100|100|100|100|100.000000|
 saco puro perez|123456|100|100|90|90|50|100|92.000000|
+daniel juan perez|234567|INCO|100|80|90|90|90|92.500000|
+javier lopez raimrez|123457|QWER|12.3|123|23|43|3|31.719999|
+jose luis ramirez|123457|QAWS|100|100|100|100|100|100.000000|
+jovana lopez rios|192837|INCO|100|100|100|100|100|100.000000|

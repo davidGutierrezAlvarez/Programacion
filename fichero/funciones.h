@@ -20,8 +20,6 @@ struct calificaciones {
       NFinal;
 }Promedio;
 
-
-
 struct datosAlumno{
   char Nombre[50],/*se guarda el nombre de los alumnos*/
       Codigo[10],/*se guarda el codigo de los alumnos*/
@@ -29,16 +27,6 @@ struct datosAlumno{
       //Promedio_f Promedio;
 }Alumno;
 
-struct MatrizSalon{/*en esta estructura se almacenan todos los datos de los alumnos
-                    para ordenar los alumnos*/
-  char Nombre[40][50],/*se guarda el nombre de los alumnos*/
-      Codigo[40][10],/*se guarda el codigo de los alumnos*/
-      Carrera[40][10];/*se guarda la carrera de cada alumno*/
-    int Actividades[40],/*40%*/
-        Examenes[40][2],/*15% c/u (2)*/
-        Participacion[40],/*10%*/
-        Departamental[40];/*20%*/
-};
 
 void crear() {/*esta funcion busca el fichero y si no existe crea uno*/
   fichero = fopen(archivo, "rt");/*busca fichero para leerlo*/
@@ -52,9 +40,34 @@ void crear() {/*esta funcion busca el fichero y si no existe crea uno*/
 
 void nuevoAlumno(){
   fflush(stdin);
+  char digito = 0;
   printf("\nNombre completo 'empezar por nombre' : ");gets(Alumno.Nombre);
-  printf("\ncodigo '6 digitos': ");scanf("%s",&Alumno.Codigo);
-  printf("\ncarrera 'porcentaje sobre 100' : ");scanf("%s",&Alumno.Carrera);
+
+  do {
+    digito = 0;
+    printf("\ncodigo '6 digitos': ");scanf("%s",&Alumno.Codigo);
+    for (size_t i = 0; Alumno.Codigo[i] != '\0'; i++) {
+      digito++;
+    }
+    if (digito != 6) {
+      printf("DEBES INTRODUCIR EXACTAMENTE '6' LETRAS");
+    }
+    if (Vcode(Alumno.Codigo) == 1) {/*Vcode valida que el codigo no se repita*/
+      printf("El codigo ya existe, introdusca otro \n");
+    }
+  } while(Vcode(Alumno.Codigo) == 1 || digito != 6);
+
+  do {
+    digito = 0;
+    printf("\ncarrera '4 letras': ");scanf("%s",&Alumno.Carrera);
+    for (size_t i = 0; Alumno.Carrera[i] != '\0'; i++) {
+      digito++;
+    }
+    if (digito != 4) {
+      printf("DEBES INTRODUCIR EXACTAMENTE '4' LETRAS\n");
+    }
+  } while(digito != 4);
+
   printf("\nActividades 'porcentaje sobre 100' : ");scanf("%s",&Promedio.Actividades);
   printf("\nexamen 1 'porcentaje sobre 100' : ");scanf("%s",&Promedio.Examenes[0]);
   printf("\nexamen 2 'porcentaje sobre 100' : ");scanf("%s",&Promedio.Examenes[1]);
@@ -62,11 +75,10 @@ void nuevoAlumno(){
   printf("\ndepartamental 'porcentaje sobre 100' : ");scanf("%s",&Promedio.Departamental);
 }
 
-void agregarAlumno() {//Ccon esto agregamos el alumno creado al fichero
 
+void agregarAlumno() {//Ccon esto agregamos el alumno creado al fichero
   fichero = fopen(archivo, "at");/*escribe al final del documento*/
   fflush(stdin);
-  fprintf(fichero, "\n");
   fwrite(Alumno.Nombre,1,strlen(Alumno.Nombre),fichero);
   fprintf(fichero, "|");
   fwrite(Alumno.Codigo,1,strlen(Alumno.Codigo),fichero);
@@ -98,12 +110,9 @@ void agregarAlumno() {//Ccon esto agregamos el alumno creado al fichero
   sprintf(Promedio.Final, "%f", Promedio.NFinal);
   fwrite(Promedio.Final,1,strlen(Promedio.Final),fichero);
   fprintf(fichero, "|");
-
+  fprintf(fichero, "\n");
   fclose(fichero);
-  //calFinal.Actividades = isdigit(Promedio.Actividades);
 }
-
-
 
 void mostrarAlumnos() {
   int c,contador=1,letras=0,total,barras=0;
@@ -149,20 +158,46 @@ void mostrarAlumnos() {
     }else {
       putchar(c);
       letras++;
+
     }
   }
+  printf("\r     " );
 }
 
-int charToInt(char cadena[5]) {
-  float numero;
-  numero = atof(cadena);/*convierte la cadena a un entero*/
-  return numero;
-}
 
-void intToChar(int numero, char *cadena) {
-    sprintf(cadena, "%i", numero);
-}
+int Vcode(char code[]){/*esta funcion valida la existencia del codigo de algun alumno*/
+  char inicio = '|', fin = '|', linea[100];
+  int c, nCaracteres=0, barrita=1, count=0;
 
+  fichero = fopen(archivo, "rt");
+  fflush(stdin);
+
+  while ((c=fgetc(fichero)) != EOF) {/*revisara caracter por caracter*/
+    if (c != '\n') {/*revisa renglon por renglon*/
+      linea[nCaracteres]=c;/*guarda cada caracter del renglon*/
+      nCaracteres++;/*recorre el renglon*/
+      barrita=0;/*reinicia las barras de separacion al saltar una linea*/
+    }else {
+      nCaracteres=0;/*cuando hay un salto de linea recorrera otro renglon*/
+      for (size_t i = 0; linea[i] != '\0'; i++) {
+        if (linea[i] == '|') {
+          barrita++;
+        }
+        if (linea[i]==code[count]  && barrita==1) {
+          /*revisara si la palabra esta en esa linea*/
+          count++;
+          /*si la cantidad de caracteres coincide y termina e inicia con el bloque con un '|' si existe*/
+          if (count==strlen(code) && linea[i-strlen(code)]==inicio && linea[i+1]==fin) {/*cuando la palabra coinsida imprimira la linea*/
+            return 1;
+          }
+        }else {
+          count=0;/*cuando dejen de coincidir las letras se resetea*/
+        }
+      }/*fin del for*/
+    }/*fin del condicional*/
+  }/*fin del while*/
+  return 0;
+}
 
 void buscar(int valor){
   char inicio, fin = '|';
@@ -186,7 +221,7 @@ void buscar(int valor){
       linea[nCaracteres]=c;/*guarda cada caracter del renglon*/
       nCaracteres++;/*recorre el renglon*/
       barrita=0;
-    }else {
+    }else if(c == '\n'){
       nCaracteres=0;/*cuando hay un salto de linea recorrera otro renglon*/
       for (size_t i = 0; linea[i] != '\0'; i++) {
         if (linea[i] == '|') {
@@ -237,6 +272,7 @@ void buscar(int valor){
                 letras++;
               }
             }
+
           }
 
         }else {
@@ -247,6 +283,19 @@ void buscar(int valor){
   }/*fin del while*/
   printf("%i\n", contador);
   if (contador==1) {
-    printf("\t\t\t\t.:NO SE ENCONTRARON ALUMNOS:.\n");
+    printf("\t\t\t\t\t\t\t\t.:NO SE ENCONTRARON ALUMNOS:.\n");
   }
+}
+
+int contarAlumnos() {
+  int c, CAlumnos=0;
+
+  fichero = fopen(archivo, "rt");
+
+  while ((c=fgetc(fichero)) != EOF) {
+    if (c == '\n') {
+      CAlumnos++;
+    }
+  }
+  return CAlumnos;
 }
