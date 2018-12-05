@@ -8,7 +8,6 @@
 
 int main() {
   char menu,submenu;
-  char matriz[7000];
 
   crear();/*revisa si existe el fichero y sino lo crea*/
 
@@ -65,13 +64,13 @@ int main() {
       break;
       case '5': {
         printf("1.-Nombre\n2.-calificacion\ncomo los desea ordenar\n");
-        scanf("%i\n", submenu);
+        scanf("%s", &submenu);
         switch (submenu) {
-          case 1:
-            mostrarAlumnos();
+          case '1':
+            ordenNombre();
             break;
-          case 2:
-            mostrarAlumnos();
+          case '2':
+            ordenCalif();
             break;
         }
 

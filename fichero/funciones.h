@@ -304,6 +304,13 @@ int contarAlumnos() {
   return CAlumnos;
 }
 
+void ordenNombre(){
+  mostrarAlumnos();
+}
+
+void ordenCalif() {
+  mostrarAlumnos();
+}
 
 void saveMatriz() {
   int c,contador=1,nCaracteres=0;
@@ -337,6 +344,7 @@ void saveMatriz() {
 
 
 void ordenar(){
+  //saveMatriz();
   // for (size_t i = 0; i < contarAlumnos()-1; i++) {
   //   for (size_t j = 0; j < contarAlumnos()-1; j++) {
   //     fflush(stdin);
