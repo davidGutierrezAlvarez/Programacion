@@ -11,7 +11,6 @@ typedef struct{
       Departamental[MaxAlumnos];/*20%*/
 }Promedio;
 
-
 typedef struct {
   char  Nombre[MaxAlumnos][50],/*se guarda el nombre de los alumnos*/
         Carrera[MaxAlumnos][50],/*se guarda la carrera de cada alumno*/
