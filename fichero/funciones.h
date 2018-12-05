@@ -27,14 +27,20 @@ struct datosAlumno{
       //Promedio_f Promedio;
 }Alumno;
 
+struct matrizSalon{
+  char Linea[40][300],
+  auxiliarLinea[300],
+  Calificacion[40][15],
+  auxiliarCal[15];
+}Salon;
 
 void crear() {/*esta funcion busca el fichero y si no existe crea uno*/
   fichero = fopen(archivo, "rt");/*busca fichero para leerlo*/
   if (fichero == NULL) {/*si ocurre algun erro lo crea*/
     fichero = fopen(archivo, "wt");
-    printf("el fichero no existia y se creo uno\n");
+    printf("no hay alumnos en su bse de datos\n");
   }else{
-    printf("el fichero ya existe\n");
+    printf("ya hay una base de datos\n");
   }
 }
 
@@ -298,10 +304,6 @@ int contarAlumnos() {
   return CAlumnos;
 }
 
-struct matrizSalon{
-  char Linea[40][300],
-  Calificacion[40][15];
-}Salon;
 
 void saveMatriz() {
   int c,contador=1,nCaracteres=0;
@@ -334,9 +336,35 @@ void saveMatriz() {
 }
 
 
-void mostrar(){
+void ordenar(){
+  // for (size_t i = 0; i < contarAlumnos()-1; i++) {
+  //   for (size_t j = 0; j < contarAlumnos()-1; j++) {
+  //     fflush(stdin);
+  //     if (atof(Salon.Calificacion[j]) < atof(Salon.Calificacion[j+1])) {
+  //
+  //       // strcpy(Salon.auxiliarCal , Salon.Calificacion[j]);
+  //       // strcpy(Salon.Calificacion[j] , Salon.Calificacion[j+1]);
+  //       // strcpy(Salon.Calificacion[j+1] , Salon.auxiliarCal[j]);
+  //       *Salon.auxiliarCal = Salon.Calificacion[j];
+  //       printf("%s\n", Salon.auxiliarCal);
+  //       *Salon.Calificacion[j] = Salon.Calificacion[j+1];
+  //       *Salon.Calificacion[j+1] = Salon.auxiliarCal;
+  //
+  //       *Salon.auxiliarLinea = *Salon.Linea[j];
+  //       *Salon.Linea[j] = *Salon.Linea[j+1];
+  //       *Salon.Linea[j+1] = *Salon.auxiliarLinea;
+  //     }
+  //     printf("%i_%s\n",i, Salon.Calificacion[j]);
+  //     printf("%i_%s\n",i, Salon.Linea[j]);
+  //   }
+  // }
+  // fichero = fopen(archivo, "wt");
+  // fclose(archivo);
+  // fichero = fopen(archivo, "at");
   for (size_t i = 0; i < contarAlumnos(); i++) {
-    printf("%s\n", Salon.Linea[i]);
     printf("%s\n", Salon.Calificacion[i]);
+    // fwrite(Salon.Linea[i],1,strlen(Salon.Linea[i]),fichero);
+    // fprintf(fichero, "\n");
   }
+  // fclose(archivo);
 }

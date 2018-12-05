@@ -11,7 +11,7 @@ int main() {
   char matriz[7000];
 
   crear();/*revisa si existe el fichero y sino lo crea*/
-  printf("%i", contarAlumnos());
+
   do {
     printf("\n\t\t\t\t\t\t\t\t.:MENU DE INICIO:.\n");
     printf("\n1.- Agregar nuevo alumno\n2.- Buscar\n3.- Filtrar por Carrera\n");
@@ -22,7 +22,7 @@ int main() {
 
     switch (menu) {
       case '1':{
-        if (contarAlumnos() > 12) {
+        if (contarAlumnos() > 40) {
           printf("YA SE A REGISTRADO LA CANTIDAD MAXIMA DE ALUMNOS\n");
           system("pause");
         }else{
@@ -64,9 +64,17 @@ int main() {
         mostrarAlumnos();
       break;
       case '5': {
-        saveMatriz();
-        mostrar();
-        printf("en construccion...");
+        printf("1.-Nombre\n2.-calificacion\ncomo los desea ordenar\n");
+        scanf("%i\n", submenu);
+        switch (submenu) {
+          case 1:
+            mostrarAlumnos();
+            break;
+          case 2:
+            mostrarAlumnos();
+            break;
+        }
+
       }
         break;
         /*ordenar lista de alumnos*/
