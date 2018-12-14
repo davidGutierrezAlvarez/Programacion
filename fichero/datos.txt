@@ -1,2 +1,0 @@
-david gutierrez alvarez|123456|INCO|100|90|90|90|90|94.000000|
-jovana lopez rios|234567|INCO|100|100|100|90|90|97.000000|

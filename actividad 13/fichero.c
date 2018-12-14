@@ -12,7 +12,7 @@ int main() {
   crear();/*revisa si existe el fichero y sino lo crea*/
 
   do {
-    printf("\n\t\t\t\t\t\t\t\t.:MENU DE INICIO:.\n");
+    printf("\n\t\t\t\t\t\t\t.:MENU DE INICIO:.\n");
     printf("\n1.- Agregar nuevo alumno\n2.- Buscar\n3.- Filtrar por Carrera\n");
     printf("4.- Ver lista de alumnos\n5.- Ordenar lista de alumnos\n6.- Salir del program \n");
     printf("que desea hacer: ");

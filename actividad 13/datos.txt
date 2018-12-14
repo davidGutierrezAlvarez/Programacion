@@ -1,0 +1,6 @@
+david gutierrez alvarez|123456|INCO|100|90|90|90|90|94.000000|
+jovana lopez rios|234567|INCO|100|100|100|90|90|97.000000|
+juan lopez perez|987654|INI|20|30|100|100|100|57.500000|
+juan lopez perez|987655|INCO|60|70|80|90|100|75.500000|
+angel ramirez ramirez|135734|INI|0|100|100|60|70|50.000000|
+sonia|222222|inf|100|100|100|100|100|100.000000|

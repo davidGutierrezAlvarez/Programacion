@@ -30,18 +30,28 @@ while(counter==0){
     printf("\n\n\n");
     printf("preciona una teclapara mover el caracter");
     printf("\nA Arriba\nB Abajo\nI Izquierda\nD Derecha\nF Salir\n");
-
-    scanf("%c",&flechas);
+    flechas = getche();
+    //scanf("%c",&flechas);
     switch(flechas){
-        case 'a': case 'A':columna--;break;
+        case 72: case 'a':{
+          if (columna > 1) {
+            columna--;
+          }
+        }
+        break;
 
-        case 'b': case 'B':columna++;break;
+        case 80: case 'B':columna++;break;
 
-        case 'i': case 'I':fila--;break;
+        case 75: case 'I':{
+            if (fila > 0) {
+              fila--;
+            }
+        }
+        break;
 
-        case 'd': case 'D':fila++;break;
+        case 77: case 'D':fila++;break;
 
-        case 'f': case 'F':counter=1;break;
+        case 27: case 'F':counter=1;break;
     }
     system("cls");
 }

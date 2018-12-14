@@ -65,14 +65,14 @@ void nuevoAlumno(){
 
   do {
     digito = 0;
-    printf("\ncarrera '4 letras': ");scanf("%s",&Alumno.Carrera);
+    printf("\ncarrera '3 o 4 letras': ");scanf("%s",&Alumno.Carrera);
     for (size_t i = 0; Alumno.Carrera[i] != '\0'; i++) {
       digito++;
     }
-    if (digito != 4) {
+    if (digito != 4 && digito != 3) {
       printf("DEBES INTRODUCIR EXACTAMENTE '4' LETRAS\n");
     }
-  } while(digito != 4);
+  } while(digito != 4 && digito != 3);
 
   printf("\nActividades 'porcentaje sobre 100' : ");scanf("%s",&Promedio.Actividades);
   printf("\nexamen 1 'porcentaje sobre 100' : ");scanf("%s",&Promedio.Examenes[0]);
@@ -166,7 +166,11 @@ void mostrarAlumnos() {
 
     }
   }
-  printf("\r     " );
+  printf("\r     ");
+
+  if (contador == 2) {
+    printf("\n\n\t\t\t\t\t\t\t.:NO HAY ALUMNOS REGISTRADOS:.\n\n\n");
+  }
 }
 
 int Vcode(char code[]){/*esta funcion valida la existencia del codigo de algun alumno*/
@@ -207,7 +211,7 @@ void buscar(int valor){
   char inicio, fin = '|';
   int c,contador=1,nCaracteres=0,barras=0,total=0,letras=0;
   int barrita;
-  char linea[100],buscar[30];
+  char linea[100]="",buscar[30];
   int count=0;
   fichero = fopen(archivo, "rt");
   fflush(stdin);
@@ -231,8 +235,9 @@ void buscar(int valor){
         if (linea[i] == '|') {
           barrita++;
         }
+        fflush(stdin);
         if (linea[i]==buscar[count]  && barrita==valor) {/*revisara si la palabra esta en esa linea*/
-          count++;
+          count++;/*aumentan las letras coincidentes*/
           /*si la cantidad de caracteres coincide y termina e inicia con el bloque con un '|' si existe*/
           if (count==strlen(buscar) && linea[i-strlen(buscar)]==inicio && linea[i+1]==fin) {/*cuando la palabra coinsida imprimira la linea*/
             /*esto imprimira la linea con orden*/
@@ -264,6 +269,8 @@ void buscar(int valor){
                   break;
                   case 8:total=12;/*total de espacios para promedio*/
                   break;
+                  default:
+                    printf("%i",total);
                 }
                 for (size_t i = 0; i < total-letras; i++) {
                   printf(" ");
@@ -271,6 +278,9 @@ void buscar(int valor){
                 printf(" | ");
                 letras=0;
                 barras++;
+                if (barras >= 9) {
+                  break;
+                }
               }else{
                 printf("%c", linea[i]);
                 letras++;
@@ -285,9 +295,8 @@ void buscar(int valor){
       }/*fin del for*/
     }/*fin del condicional*/
   }/*fin del while*/
-  printf("%i\n", contador);
   if (contador==1) {
-    printf("\t\t\t\t\t\t\t\t.:NO SE ENCONTRARON ALUMNOS:.\n");
+    printf("\n\n\t\t\t\t\t\t\t.:NO SE ENCONTRARON ALUMNOS:.\n\n\n");
   }
 }
 
